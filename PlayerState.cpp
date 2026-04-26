@@ -64,13 +64,8 @@ bool PlayerState::feedInput(Direction d, int& outCombo) {
 }
 
 void PlayerState::onStringCleared(bool clean) {
-<<<<<<< HEAD
     if (clean) {combo_++; std::cout<<"clean\n";}
     else       {combo_ = 0; std::cout<<"dirt\n";} // any typo in the string breaks the combo
-=======
-    if (clean) {combo_++;}
-    else       {combo_ = 0;} // any typo in the string breaks the combo
->>>>>>> 89fcc8989879066325dd955c2f2be1d08c265877
 }
 
 // --- Queue management ---
