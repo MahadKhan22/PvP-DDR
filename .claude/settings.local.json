@@ -1,16 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(Write-Output \"Current dir: $\\(Get-Location\\)\"; ls)",
-      "PowerShell(Get-Command claude -ErrorAction SilentlyContinue)",
-      "PowerShell(npm list -g @anthropic-ai/claude-code 2>$null)",
-      "PowerShell(npm list -g claude 2>$null)",
-      "PowerShell(Get-ChildItem \"$env:LOCALAPPDATA\\\\Programs\" -ErrorAction SilentlyContinue | Select-Object Name; Test-Path \"$env:LOCALAPPDATA\\\\AnthropicClaude\")",
-      "PowerShell(Write-Output \"Node check:\"; node --version 2>&1; Write-Output \"npm check:\"; npm --version 2>&1; Write-Output \"LocalAppData Programs:\"; Get-ChildItem \"$env:LOCALAPPDATA\\\\Programs\" | Select-Object -ExpandProperty Name)",
-      "Bash(g++ -std=c++17 -Wall -Wextra -g -o test_combo.exe main.cpp Arrow.cpp ArrowString.cpp PlayerState.cpp GameState.cpp)",
-      "Bash(./test_combo.exe)",
-      "Bash(g++ -std=c++17 -Wall -Wextra -g -o test_combo.exe test_combo.cpp Arrow.cpp ArrowString.cpp PlayerState.cpp)",
-      "Bash(g++ *)"
+      "mcp__ide__getDiagnostics",
+      "Read(//c/msys64/ucrt64/include/SFML/**)",
+      "Read(//c/msys64/ucrt64/bin/**)",
+      "Bash(grep -E \"\\\\.\\(exe|o\\)$\")",
+      "PowerShell(Get-Command *)",
+      "Bash(mingw32-make)",
+      "Bash(mingw32-make clean *)",
+      "Bash(rm -f *.o game.exe)",
+      "Bash(g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wunused -c *.cpp)",
+      "Bash(rm -f *.o)",
+      "Bash(g++ -std=c++17 -Wall -Wextra -Wpedantic -Wshadow -Wunused-parameter -Wunused-but-set-variable -Wunused-variable -Wunreachable-code -Wmissing-field-initializers -c *.cpp)"
     ]
   }
 }

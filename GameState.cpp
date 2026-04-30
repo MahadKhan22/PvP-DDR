@@ -17,8 +17,8 @@ bool GameState::tick() {
         // In SFML: adjust the fall velocity of all strings
     }
 
-    bool p1Lost = p1_.tick(maxStringAge_);
-    bool p2Lost = p2_.tick(maxStringAge_);
+    bool p1Lost = p1_.tick(maxStringAge_, globalSpeedMult_);
+    bool p2Lost = p2_.tick(maxStringAge_, globalSpeedMult_);
 
     if (p1Lost && p2Lost) {
         gameOver_ = true;
@@ -37,11 +37,17 @@ bool GameState::tick() {
 void GameState::feedInput(int playerId, Direction d) {
     if (gameOver_) return;
 
-    int newCombo = 0;
     PlayerState& attacker = player(playerId);
+    int comboBefore = attacker.combo();
+    int newCombo = 0;
     attacker.feedInput(d, newCombo);
 
-    handleComboTrigger(playerId, newCombo);
+    // Only fire on the input that CROSSED the threshold. Without this,
+    // every matched-but-not-completing key while combo is still at 5
+    // (mid next string) re-triggers the penalty injection.
+    if (newCombo > comboBefore) {
+        handleComboTrigger(playerId, newCombo);
+    }
 }
 
 void GameState::handleComboTrigger(int attackerId, int newCombo) {

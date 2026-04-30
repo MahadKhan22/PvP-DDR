@@ -29,13 +29,21 @@ public:
     // e.g.  [^] [v] >>[<]<< [>]
     std::string display() const;
 
-    // How many ticks this string has been alive (used to detect reaching bottom)
-    void tick();
-    int  age() const;
+    // Advance age by ageDelta (default 1.0 = one tick at base speed).
+    // Caller passes the player's effective speed so debuffs/global scaling
+    // actually translate into a faster fall.
+    void  tick(float ageDelta = 1.0f);
+    float age() const;
+
+    // --- Renderer accessors (added for SFML rendering; read-only) ---
+    const std::vector<Direction>& sequence() const { return sequence_; }
+    bool hasTypo()    const { return dirty_; }
+    int  typoCount() const { return typos_; }
 
 private:
     std::vector<Direction> sequence_;
-    int  pointer_  = 0;    // index of next arrow to match
-    bool dirty_    = false; // true if any typo occurred
-    int  age_      = 0;
+    int   pointer_ = 0;     // index of next arrow to match
+    bool  dirty_   = false; // true if any typo occurred (kept for combo logic)
+    int   typos_   = 0;     // total typo count for this string (sudden-death)
+    float age_     = 0.0f;  // float so speed multipliers can scale aging fractionally
 };

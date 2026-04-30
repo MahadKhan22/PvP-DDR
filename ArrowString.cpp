@@ -21,6 +21,7 @@ bool ArrowString::feedInput(Direction d) {
         return true;
     } else {
         dirty_ = true; // typo, combo broken, but keep going
+        ++typos_;       // counted for sudden-death check in PlayerState
         return false;
     }
 }
@@ -40,8 +41,8 @@ int ArrowString::length() const { return static_cast<int>(sequence_.size()); }
 
 // --- Age tracking ---
 
-void ArrowString::tick() { ++age_; }
-int  ArrowString::age()  const { return age_; }
+void  ArrowString::tick(float ageDelta) { age_ += ageDelta; }
+float ArrowString::age() const { return age_; }
 
 // --- Display ---
 

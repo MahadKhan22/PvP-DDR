@@ -21,8 +21,7 @@ std::string dirToStr(Direction d) {
 }
 
 // Player 0: W=up, S=down, A=left, D=right
-// Player 1 (CLI substitute): i=up, k=down, j=left, l=right
-//   (In SFML you'll swap this to sf::Keyboard arrow keys)
+// Player 1: i=up, k=down, j=left, l=right
 bool charToDir(char c, Direction& out, int player) {
     if (player == 0) {
         switch (c) {
@@ -40,4 +39,27 @@ bool charToDir(char c, Direction& out, int player) {
         }
     }
     return false;
+}
+
+// SFML keyboard mapping. Matches the README's controls table exactly:
+//   P1: W=Up, S=Down, A=Left, D=Right
+//   P2: I=Up, K=Down, J=Left, L=Right
+bool keyToDir(sf::Keyboard::Key key, Direction& out, int player) {
+    if (player == 0) {
+        switch (key) {
+            case sf::Keyboard::W: out = Direction::UP;    return true;
+            case sf::Keyboard::S: out = Direction::DOWN;  return true;
+            case sf::Keyboard::A: out = Direction::LEFT;  return true;
+            case sf::Keyboard::D: out = Direction::RIGHT; return true;
+            default: return false;
+        }
+    } else {
+        switch (key) {
+            case sf::Keyboard::I: out = Direction::UP;    return true;
+            case sf::Keyboard::K: out = Direction::DOWN;  return true;
+            case sf::Keyboard::J: out = Direction::LEFT;  return true;
+            case sf::Keyboard::L: out = Direction::RIGHT; return true;
+            default: return false;
+        }
+    }
 }
