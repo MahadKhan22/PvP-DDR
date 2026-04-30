@@ -102,21 +102,6 @@ mingw32-make
 ./game.exe
 ```
 
-### Linux (Debian/Ubuntu)
-
-```bash
-sudo apt install g++ libsfml-dev make
-make
-./game
-```
-
-### Mac (Homebrew)
-
-```bash
-brew install sfml@2 make
-make
-./game
-```
 
 ---
 
